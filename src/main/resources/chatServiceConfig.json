@@ -1,0 +1,74 @@
+{
+  
+  "deviceChat": 
+  {
+  
+  
+	  "Initial":
+	  {
+			"displayMsg":"Thanks for your patience we are looking into the issue. Please standby."
+		
+	  },
+	  
+	  "submitByHelpDesk":
+	  {
+		"displayMsg":"We have observed an internal issue with our systems. If you wish to complete the transaction, I can post the transaction on your behalf by using our back-end system ? Enter 'Yes' or 'No'"
+	  },
+	  	  
+	  "submitByHelpDesk_Yes":
+	  {
+			"displayMsg":"Device Swap is complete. Please restart your new mobile and should be able to enjoy our services."
+	  },
+	  
+	  "submitByHelpDesk_No":
+	  {
+			"displayMsg":"How else we can help you on this issue. Do you need any further assistance from us."
+	  },
+	  "submitByUser":
+	  {
+			"displayMsg":"We have identified and rectified the data issue and it may take some time to reflect the changes. Please retry the transaction after 30 mts."
+	  },
+	  
+	   "success":
+	  {
+			"displayMsg":"Device Swap is complete. Please restart your new mobile and should be able to enjoy our services."
+	  },
+	  
+	  "Thanks":
+	  {
+	    "displayMsg": "You are welcome. Have a Wonderfull Day!!!."
+	  },
+	  
+	  "helpDeskTicket":
+	  {
+			"displayMsg":"We need further investigation from our technical team on the issue. Once the issue is resolved we will keep you posted. Please use the Reference Number: SD123456 for any further communications on the issue"
+	  },
+	  
+	 "default":
+	  {
+			"displayMsg":"Backend system is down at this point of time.  Please retry the transaction after some time. If issue still presists, please raise a helpdesk ticket."
+	  }
+    
+  },
+  
+  "iccid": 
+  {
+  
+  	"12345678901234":
+	  {
+		"error":"0",
+		"statusMessage":"Success"
+	  },
+	  
+	  "123456789012345":
+	  {
+		"error":"-1",
+		"statusMessage":"Invalid iccid"
+	  },
+     "errors":
+	  {
+		"error":"-1",
+		"statusMessage":"ICCID Not Found"
+	  }
+  } 
+} 

@@ -1,10 +1,10 @@
-package com.java.web.springbootwebservice;
+package com.java.web.chatmessageservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringbootwebserviceApplicationTests {
+class ChatMessageServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

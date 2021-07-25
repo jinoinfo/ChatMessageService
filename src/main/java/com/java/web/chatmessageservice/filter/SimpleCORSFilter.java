@@ -1,4 +1,4 @@
-package com.java.web.springbootwebservice.filter;
+package com.java.web.chatmessageservice.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -27,10 +27,12 @@ public SimpleCORSFilter() {
 @Override
 public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
-	System.out.println("SimpleCORSFilter -->  doFilter");
+	
     HttpServletRequest request = (HttpServletRequest) req;
+    
     HttpServletResponse response = (HttpServletResponse) res;
 
+    System.out.println("SimpleCORSFilter -->  doFilter ..request.getMethod.."+request.getMethod());
     response.setHeader("Access-Control-Allow-Origin", "*");
     response.setHeader("Access-Control-Allow-Credentials", "true");
     response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
@@ -40,6 +42,7 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
         response.setStatus(HttpServletResponse.SC_OK);
     } else {
+    	System.out.println("inside else for post...");
         chain.doFilter(req, res);
     }
    // chain.doFilter(req, res);

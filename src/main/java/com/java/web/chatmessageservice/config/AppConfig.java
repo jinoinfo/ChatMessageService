@@ -1,4 +1,4 @@
-package com.java.web.springbootwebservice.config;
+package com.java.web.chatmessageservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
