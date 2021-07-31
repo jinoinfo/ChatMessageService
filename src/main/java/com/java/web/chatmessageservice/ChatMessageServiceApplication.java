@@ -47,7 +47,7 @@ public class ChatMessageServiceApplication extends SpringBootServletInitializer{
 	
 	private static Class<ChatMessageServiceApplication> applicationClass = ChatMessageServiceApplication.class;
 
-	Map<String, Object> deviceCache =null;
+	Map<String, Object> chatObjCache =null;
 	public static void main(String[] args) {
 		SpringApplication.run(ChatMessageServiceApplication.class, args);
 	}
@@ -64,23 +64,23 @@ public class ChatMessageServiceApplication extends SpringBootServletInitializer{
 	@ResponseBody
 	public String getChatservice(@RequestBody Map<String, String> chatMsgMap) {
 		
-		//String messageKey= chatServiceMap.get("messageKey");
+		String issueType = chatMsgMap.get("type");
 		
 		//String message= chatServiceMap.get("message");
 		String chatMsgKey =chatMsgMap.get("messageKey");
 		System.out.println("chat message key "+chatMsgKey);
 		
-		deviceCache = new ConcurrentHashMap<String, Object>();
+		chatObjCache = new ConcurrentHashMap<String, Object>();
 		
 		//loading the device json file 
-		loadDeviceJson(chatMsgKey);
+		loadDeviceJson(issueType,chatMsgKey);
 		
-		JSONObject deviceCacheChatObj = (JSONObject)deviceCache.get("deviceChatMsg");
+		JSONObject chatConfigObj = (JSONObject)chatObjCache.get(issueType);
 		
 		//System.out.println ("deviceObj is  "+deviceObj);
-		if (deviceCacheChatObj != null ) {
-			JSONObject chatMsgObj = (JSONObject) deviceCacheChatObj.get(chatMsgKey);
-			System.out.println("Chat Message Object is "+ deviceCacheChatObj.get(chatMsgKey));
+		if (chatConfigObj != null ) {
+			JSONObject chatMsgObj = (JSONObject) chatConfigObj.get(chatMsgKey);
+			System.out.println("Chat Config Message Object is "+ chatConfigObj.get(chatMsgKey));
 			
 			
 			if (chatMsgObj != null ) {
@@ -88,7 +88,7 @@ public class ChatMessageServiceApplication extends SpringBootServletInitializer{
 				return chatMsgObj.toString();
 			}	else {
 				
-				return deviceCacheChatObj.get("default").toString();
+				return chatConfigObj.get("default").toString();
 			}
 			
 		}else {
@@ -108,19 +108,15 @@ public class ChatMessageServiceApplication extends SpringBootServletInitializer{
 		
 	}
 
-	private void loadDeviceJson(String messageKey) {
+	private void loadDeviceJson(String chatType, String messageKey) {
 		
 
+		System.out.println ("Chat type request is  "+chatType);
 		JSONParser jsonParser = new JSONParser();
 		
 		try {
 			
-			Gson gson = new GsonBuilder()
-			        .setLenient()
-			        .create();
-			
-			
-		//	gson.
+		
 			Resource resource=resourceLoader.getResource("classpath:./chatServiceConfig.json");
 			
 			System.out.println("resource .."+resource);
@@ -135,7 +131,7 @@ public class ChatMessageServiceApplication extends SpringBootServletInitializer{
 			
 		      //System.out.println("JsonObject .."+obj);
 		      InputStream stream= resource.getInputStream();
-		      String jsonData ="";
+		   
 		      BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(stream));
 
 			    
@@ -147,11 +143,11 @@ public class ChatMessageServiceApplication extends SpringBootServletInitializer{
 		      JSONObject jsonObj = (org.json.simple.JSONObject)obj;
 		      
 		  
-		      JSONObject deviceChatObj =  (JSONObject) jsonObj.get("deviceChat");
+		      JSONObject chatObj =  (JSONObject) jsonObj.get(chatType);
 		  				
-			  System.out.println("deviceObj is .."+deviceChatObj);
+			  System.out.println("Chat Object retrieved for the chat type ."+chatType+ " is..  "+chatObj);
 				
-			  deviceCache.put("deviceChatMsg", deviceChatObj);
+			  chatObjCache.put(chatType, chatObj);
 				
 							
 			 /* JSONObject simObj = (JSONObject) jsonObj.get("iccid");
